@@ -1,146 +1,891 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <title>Pontos de Coleta de Lixo Eletrônico - Caçapava/SP</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pontos de coleta de lixo eletrônico em Caçapava/SP. Descarte seus eletrônicos usados nos locais oficiais e contribua com o meio ambiente.">
-  
-  <!-- Leaflet CSS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>Bloom Gardening · Festa da Amiga</title>
+  <!-- Ícone personalizado da aba (logo.png) -->
+  <link rel="icon" href="fit.png" type="image/png" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  
-  <!-- Font Awesome para ícones -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Google Fonts - Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Estilos personalizados -->
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon"  href="fit.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      background: #faf3ea;
+      font-family: 'Quicksand', sans-serif;
+      color: #2b4b3a;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --primary-green: #5b8c6f;
+      --soft-pink: #f3cfc3;
+      --dark-soil: #6b4f3a;
+      --medium-soil: #b59d84;
+      --light-sand: #e8ddcf;
+      --pantone-493: #b8576e;
+      --pantone-7735: #256f5e;
+      --pantone-7508: #c5a582;
+      --pantone-5845: #6b6f4a;
+    }
+
+    h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+    h2 { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+    h3 { font-size: clamp(1.5rem, 5vw, 2rem); }
+    p { font-size: clamp(1rem, 4vw, 1.2rem); }
+
+    .section {
+      padding: 2rem 1.2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section__title {
+      text-align: center;
+      color: var(--primary-green);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .section__title i {
+      color: var(--pantone-493);
+      font-size: 1.8rem;
+    }
+
+    /* ===== CAPA COM FLORZINHAS MEXENDO ===== */
+    .hero {
+      background: linear-gradient(145deg, #2a5e45 0%, #4b7b63 50%, #699e7a 100%);
+      padding: 2.5rem 1rem 3.5rem;
+      border-bottom: 6px solid var(--pantone-493);
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Container das florzinhas flutuantes */
+    .floating-flowers {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-flower {
+      position: absolute;
+      font-size: 2.5rem;
+      opacity: 0.25;
+      animation: floatFlower 12s ease-in-out infinite;
+    }
+
+    /* Posições e delays diferentes para cada flor */
+    .floating-flower:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+    .floating-flower:nth-child(2) { top: 70%; right: 8%; animation-delay: 2s; }
+    .floating-flower:nth-child(3) { bottom: 15%; left: 15%; animation-delay: 4s; }
+    .floating-flower:nth-child(4) { top: 40%; right: 20%; animation-delay: 1s; }
+    .floating-flower:nth-child(5) { bottom: 30%; right: 30%; animation-delay: 5s; }
+    .floating-flower:nth-child(6) { top: 80%; left: 25%; animation-delay: 3s; }
+    .floating-flower:nth-child(7) { top: 20%; right: 40%; animation-delay: 6s; }
+    .floating-flower:nth-child(8) { bottom: 40%; left: 40%; animation-delay: 2.5s; }
+
+    @keyframes floatFlower {
+      0%, 100% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-10px) translateX(5px) rotate(5deg);
+      }
+      50% {
+        transform: translateY(-15px) translateX(-5px) rotate(-5deg);
+      }
+      75% {
+        transform: translateY(-5px) translateX(8px) rotate(3deg);
+      }
+    }
+
+    .hero-card {
+      background: rgba(255, 251, 240, 0.92);
+      backdrop-filter: blur(3px);
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+      border-radius: 70px 20px 70px 20px;
+      border: 4px solid var(--soft-pink);
+      box-shadow: 0 25px 30px -10px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 245, 220, 0.5) inset;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero h1 {
+      color: #2b6b4a;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      text-shadow: 2px 2px 0 rgba(255, 245, 220, 0.8);
+    }
+
+    .hero h1 span {
+      color: #b65b4a;
+      font-size: 0.8em;
+      display: block;
+    }
+
+    .verse-box {
+      font-weight: 500;
+      color: #3d5e4b;
+      border-top: 3px double var(--pantone-493);
+      border-bottom: 3px double var(--pantone-493);
+      padding: 1.3rem 1rem;
+      margin: 2rem 0 1.5rem;
+      background: rgba(250, 240, 230, 0.7);
+      border-radius: 40px 10px 40px 10px;
+      font-size: clamp(1rem, 3.5vw, 1.3rem);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .data-horario {
+      background: var(--pantone-7508);
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 5vw, 1.5rem);
+      color: #1f3d2e;
+      box-shadow: 0 8px 0 #43674a;
+      border: 2px solid #fce2d4;
+      margin-top: 1.5rem;
+      text-align: center;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* canteiro estático (as plantinhas não mexem) */
+    .garden-bed {
+      background: #8b6f50;
+      height: 130px;
+      border-radius: 80px 80px 20px 20px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: clamp(10px, 3vw, 25px);
+      padding-bottom: 5px;
+      margin: 1.5rem 0 2rem;
+      box-shadow: inset 0 -10px 0 #5e4a34, 0 12px 0 #477a5b;
+      width: 100%;
+    }
+
+    .plant {
+      font-size: clamp(2.5rem, 8vw, 3.8rem);
+      filter: drop-shadow(0 5px 4px #25432e);
+    }
+
+    /* card de comida */
+    .menu-card {
+      background: #fffaf2;
+      border-radius: 50px 15px 50px 15px;
+      padding: 1.8rem 1.2rem;
+      box-shadow: 0 15px 0 #b59d84, 0 10px 20px rgba(0, 0, 0, 0.1);
+      border: 3px solid var(--pantone-7508);
+      max-width: 700px;
+      margin: 2rem auto;
+      width: 100%;
+      transition: box-shadow 0.2s;
+    }
+
+    .menu-card:hover {
+      box-shadow: 0 18px 0 #b59d84, 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .menu-card h3 {
+      color: var(--primary-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .menu-sub {
+      text-align: center;
+      font-size: clamp(1.1rem, 4vw, 1.3rem);
+      color: #9b6f5b;
+      margin-bottom: 1.8rem;
+      font-style: italic;
+      background: #f3e3d5;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      border: 1px dashed #b3826a;
+    }
+
+    .menu-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: clamp(1rem, 3.5vw, 1.2rem);
+      font-weight: 500;
+      color: #4e3f30;
+      background: #f3eae0;
+      padding: 0.7rem 1rem;
+      border-radius: 40px 8px 40px 8px;
+      border: 1px solid #dbbc9b;
+    }
+
+    .menu-item i {
+      font-size: 1.6rem;
+      color: var(--pantone-493);
+      width: 28px;
+      text-align: center;
+    }
+
+    /* ATIVIDADE PRINCIPAL */
+    .atividade-card {
+      background: #e6dccb;
+      border-radius: 60px 15px 60px 15px;
+      padding: 2rem 1.5rem;
+      border: 5px solid var(--pantone-5845);
+      box-shadow: 0 15px 0 #657c5a, 0 10px 20px rgba(0, 0, 0, 0.1);
+      margin: 2.5rem auto;
+      max-width: 800px;
+    }
+
+    .atividade-titulo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      color: #3b6743;
+      margin-bottom: 0.8rem;
+    }
+
+    .subtitulo-oficina {
+      text-align: center;
+      font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+      font-weight: 600;
+      color: #8b5a4b;
+      margin-bottom: 1.5rem;
+      background: #faf0dd;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      display: inline-block;
+      margin-left: auto;
+      margin-right: auto;
+      width: fit-content;
+      border: 2px dotted var(--pantone-493);
+    }
+
+    .plantar-opcoes {
+      background: #fff9ed;
+      border-radius: 50px 10px 50px 10px;
+      padding: 1.8rem 1.2rem;
+      margin: 1.5rem 0;
+      border: 2px solid #a7b892;
+    }
+
+    .opcoes-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem 2rem;
+      margin: 1.2rem 0;
+    }
+
+    .opcao-item {
+      background: #f1e3d5;
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px 8px 40px 8px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #4d6742;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 2px solid #c8ab8e;
+    }
+
+    .opcao-item i {
+      color: var(--pantone-493);
+      font-size: 1.4rem;
+    }
+
+    .tema-dia-box {
+      background: var(--pantone-7508);
+      padding: 1.2rem;
+      border-radius: 40px 10px 40px 10px;
+      text-align: center;
+      margin: 1.8rem 0 0.8rem;
+      border: 4px solid #fff3d1;
+    }
+
+    .tema-dia-box h4 {
+      font-size: clamp(1.5rem, 5vw, 2.2rem);
+      color: #1d482b;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .tema-dia-box p {
+      font-size: 1.1rem;
+      color: #2d4b35;
+    }
+
+    .versiculo-destaque {
+      background: #f2e5d9;
+      padding: 1rem;
+      border-radius: 30px 8px 30px 8px;
+      border-left: 8px solid var(--pantone-493);
+      font-style: italic;
+      margin-top: 1.2rem;
+    }
+
+    /* espaço fotos grupo */
+    .grupo-fotos {
+      background: #ede0cf;
+      border-radius: 60px 10px 60px 10px;
+      padding: 2rem 1rem;
+      margin: 3rem auto;
+      border: 5px solid var(--dark-soil);
+      max-width: 1000px;
+      width: 95%;
+    }
+
+    .fotos-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      min-height: 150px;
+      background: #fbf2e6;
+      border-radius: 50px 8px 50px 8px;
+      padding: 1.5rem 0.8rem;
+      border: 3px dashed var(--pantone-5845);
+    }
+
+    .foto-item {
+      width: clamp(120px, 30vw, 150px);
+      height: clamp(120px, 30vw, 150px);
+      border-radius: 35px 8px 35px 8px;
+      background: #d4bc9e;
+      border: 4px solid #f7e3cf;
+      box-shadow: 0 6px 0 #7b8f6f;
+      overflow: hidden;
+    }
+
+    .foto-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* cores PANTONE */
+    .palette-wrapper {
+      margin: 2.5rem 0 1rem;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .palette-title {
+      font-size: clamp(1.3rem, 5vw, 1.5rem);
+      font-weight: 600;
+      color: #5a4d3e;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px dotted var(--pantone-493);
+      display: inline-block;
+      padding-bottom: 0.4rem;
+    }
+
+    .color-swatch {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px 20px;
+    }
+
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .swatch-circle {
+      width: clamp(60px, 20vw, 75px);
+      height: clamp(60px, 20vw, 75px);
+      border-radius: 50% 20% 50% 20%;
+      box-shadow: 0 6px 0 #3e5b41;
+      border: 3px solid #f9e7d4;
+    }
+
+    .swatch-name {
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #463a2e;
+    }
+
+    /* mapa */
+    .map-wrapper {
+      background: #ccb99e;
+      border-radius: 60px 8px 60px 8px;
+      padding: 1.5rem 1rem;
+      border: 5px solid #5f7b60;
+      margin: 2rem 0;
+      width: 100%;
+    }
+
+    #map {
+      height: 280px;
+      width: 100%;
+      border-radius: 40px 8px 40px 8px;
+      border: 4px solid var(--pantone-7508);
+      box-shadow: 0 10px 0 #38634c;
+    }
+
+    .endereco-box {
+      background: #fbf0e3;
+      padding: 1.2rem 0.8rem;
+      border-radius: 35px 8px 35px 8px;
+      margin-top: 1.5rem;
+      text-align: center;
+      border: 3px dashed var(--pantone-493);
+      font-size: clamp(1rem, 4vw, 1.2rem);
+      word-break: break-word;
+    }
+
+    .btn-rota {
+      background: var(--pantone-7735);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 45px 8px 45px 8px;
+      font-weight: 700;
+      font-size: clamp(1.1rem, 4.5vw, 1.3rem);
+      text-decoration: none;
+      border: 2px solid var(--soft-pink);
+      box-shadow: 0 6px 0 #1d4d3a;
+      display: inline-block;
+      margin: 0.8rem 0 0.2rem;
+      width: fit-content;
+    }
+
+    /* chatbot */
+    .chatbot-container {
+      position: fixed;
+      bottom: 80px;
+      right: 10px;
+      z-index: 999;
+    }
+
+    .chatbot-button {
+      background: var(--pantone-493);
+      border: none;
+      width: 65px;
+      height: 65px;
+      border-radius: 50% 20% 50% 20%;
+      font-size: 2.5rem;
+      color: #fffae7;
+      box-shadow: 0 8px 0 #873f54;
+      cursor: pointer;
+    }
+
+    .chatbot-modal {
+      display: none;
+      position: absolute;
+      bottom: 75px;
+      right: 0;
+      width: 85vw;
+      max-width: 340px;
+      background: #fff9ef;
+      border: 4px solid var(--pantone-5845);
+      border-radius: 35px 8px 35px 8px;
+    }
+
+    .chatbot-modal.active {
+      display: block;
+    }
+
+    .chatbot-header {
+      background: var(--pantone-7735);
+      padding: 0.8rem 1rem;
+      border-radius: 30px 5px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .chatbot-header h3 {
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .chatbot-close {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    .chatbot-messages {
+      padding: 1rem;
+      max-height: 260px;
+      overflow-y: auto;
+      font-size: 0.95rem;
+    }
+
+    .bot-message {
+      background: #eddac8;
+      padding: 0.7rem;
+      border-radius: 20px 5px 20px 5px;
+      margin-bottom: 10px;
+      border: 1px solid #b3826a;
+    }
+
+    .user-message {
+      background: #c5d9c0;
+      padding: 0.7rem;
+      border-radius: 5px 20px 5px 20px;
+      margin-bottom: 10px;
+      text-align: right;
+      border: 1px solid #63855c;
+    }
+
+    .chatbot-input {
+      display: flex;
+      border-top: 2px solid var(--pantone-7508);
+    }
+
+    .chatbot-input input {
+      flex: 1;
+      padding: 0.7rem;
+      border: none;
+      border-radius: 0 0 0 15px;
+      font-size: 0.95rem;
+    }
+
+    .chatbot-input button {
+      background: var(--pantone-5845);
+      border: none;
+      padding: 0 1rem;
+      color: white;
+      font-size: 1.2rem;
+      border-radius: 0 0 15px 0;
+      cursor: pointer;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 80px;
+      left: 10px;
+      background: var(--dark-soil);
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 25px 5px 25px 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 5px 0 #334e38;
+      text-decoration: none;
+      z-index: 98;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    footer {
+      background: #4d684f;
+      color: #fdf0da;
+      padding: 2rem 1rem;
+      text-align: center;
+      border-top: 8px solid var(--pantone-493);
+      margin-top: 2rem;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-  <!-- Header Section -->
-  <header>
-    <div class="nav__container">
-      <div class="nav__logo">
-       <img src="logo.png" alt="Logo" />
-
-      </div>
+  <!-- CAPA COM FLORZINHAS MEXENDO -->
+  <section class="hero">
+    <!-- Florzinhas flutuantes (APENAS ELAS SE MEXEM) -->
+    <div class="floating-flowers">
+      <span class="floating-flower">🌱</span>
+      <span class="floating-flower">🌸</span>
+      <span class="floating-flower">🌼</span>
+      <span class="floating-flower">🌻</span>
+      <span class="floating-flower">🌿</span>
+      <span class="floating-flower">🌷</span>
+      <span class="floating-flower">🌺</span>
+      <span class="floating-flower">🍃</span>
     </div>
     
-    <div class="header__container">
-      <h1>Pontos de Coleta de Lixo Eletrônico em Caçapava</h1>
-      <p>Descarte seu lixo eletrônico de forma correta nos diversos pontos de coleta da cidade e contribua para um meio ambiente mais sustentável</p>
-      <a href="#map-section" class="btn">Ver localização</a>
-    </div>
-  </header>
-  
-  <!-- Collection Points Info Section -->
-  <section class="info-section section__container">
-    <h2 class="section__title">Pontos Oficiais de Coleta</h2>
-    <p class="section__subtitle">Caçapava possui diversos pontos oficiais de coleta de lixo eletrônico espalhados pela cidade. Traga seus dispositivos eletrônicos usados e ajude a preservar o meio ambiente.</p>
-      
-    <div class="info-grid">
-      <div class="info-card">
-        <i class="fas fa-calendar-alt"></i>
-        <h3>Horário de Funcionamento</h3>
-        <p>Geralmente Segunda a Sexta-feira: 8h às 17h</p>
-        <p>Alguns locais têm horários específicos</p>
+    <div class="hero-card">
+      <h1>BLOOM <span>GARDENING</span></h1>
+      <div class="verse-box">
+        “E QUANTO À SEMENTE QUE CAIU EM BOA TERRA, ESSE É O CASO DAQUELE QUE OUVE A PALAVRA E A ENTENDE. E DÁ UMA COLHEITA DE CEM, SESSENTA E TRINTA POR UM”.
+        <div style="font-size:0.9rem; margin-top:8px;">MATEUS 13:23</div>
       </div>
-      
-      <div class="info-card">
-        <i class="fas fa-mobile-alt"></i>
-        <h3>O que é aceito nos pontos de coleta</h3>
-        <p>Celulares, computadores, tablets, eletrodomésticos, pilhas, baterias e outros eletrônicos de pequeno e médio porte.</p>
-      </div>
-      
-      <div class="info-card">
-        <i class="fas fa-ban"></i>
-        <h3>O que não é aceito nos pontos de coleta</h3>
-        <p>Lâmpadas fluorescentes, eletrodomésticos muito grandes (como geladeiras), produtos químicos ou materiais hospitalares.</p>
+      <div style="font-size:clamp(1.6rem, 6vw, 2rem); font-weight:600; color:#366946;">FLORESÇA · SOLO FÉRTIL</div>
+      <div class="data-horario">
+        <i class="fas fa-calendar-alt"></i> 14 março · 15h00 <span style="font-size:0.8em;">(HORÁRIO A DEFINIR)</span>
       </div>
     </div>
   </section>
-  
-  <!-- Map Section -->
-  <section id="map-section" class="section__container">
-    <h2 class="section__title"><i class="fas fa-map-marked-alt"></i> Mapa dos Pontos de Coleta</h2>
-    <p class="section__subtitle">Veja no mapa abaixo todos os pontos de coleta de lixo eletrônico em Caçapava</p>
-     
-    <div id="map"></div>
+
+  <!-- canteiro estático (as plantinhas NÃO mexem) -->
+  <div class="garden-bed">
+    <span class="plant">🌱</span>
+    <span class="plant">🌿</span>
+    <span class="plant">🌸</span>
+    <span class="plant">🌻</span>
+    <span class="plant">🌼</span>
+  </div>
+
+  <!-- LOCAL (com coordenadas atualizadas) -->
+  <section class="section">
+    <h2 class="section__title"><i class="fas fa-map-pin"></i> onde florescer</h2>
+    <div class="map-wrapper">
+      <div id="map"></div>
+      <div class="endereco-box">
+        <i class="fas fa-location-dot" style="color:#b8576e;"></i>
+        <strong>R. Todas as Nações, s/n - Vila Tatetuba, São José dos Campos - SP, 12220-612</strong>
+      </div>
+      <div style="text-align:center;">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=R.+Todas+as+Nações,+s/n+-+Vila+Tatetuba,+São+José+dos+Campos+-+SP,+12220-612" target="_blank" class="btn-rota">
+          <i class="fas fa-directions"></i> traçar rota
+        </a>
+      </div>
+    </div>
   </section>
-  
-  <!-- Why Recycle Section -->
-  <section class="info-section section__container">
-    <h2 class="section__title">Por que descartar corretamente?</h2>
-    <p class="section__subtitle">O lixo eletrônico contém substâncias tóxicas que podem contaminar o solo e a água se descartados incorretamente. Ao utilizar os pontos de coleta de Caçapava, você está:</p>
-      
-    <div class="info-grid">
-      <div class="info-card">
+
+  <!-- CARD DE COMIDA -->
+  <section class="section" style="padding-top:0;">
+    <div class="menu-card">
+      <h3>
+        <i class="fas fa-strawberry"></i> mesa ao ar livre
         <i class="fas fa-leaf"></i>
-        <h3>Protegendo o meio ambiente</h3>
-        <p>Evitando a contaminação por metais pesados como chumbo, mercúrio e cádmio.</p>
-      </div>
-      
-      <div class="info-card">
-        <i class="fas fa-users"></i>
-        <h3>Cuidando da saúde pública</h3>
-        <p>Reduzindo riscos de doenças causadas pela contaminação ambiental.</p>
-      </div>
-      
-      <div class="info-card">
-        <i class="fas fa-infinity"></i>
-        <h3>Promovendo a reciclagem</h3>
-        <p>Permitindo que até 90% dos materiais sejam reaproveitados na indústria.</p>
+      </h3>
+      <div class="menu-sub">✨ ideias de lanchinhos ✨</div>
+      <div class="menu-items">
+        <div class="menu-item"><i class="fas fa-seedling"></i><span>morangos frescos</span></div>
+        <div class="menu-item"><i class="fas fa-cake"></i><span>cupcakes com flor</span></div>
+        <div class="menu-item"><i class="fas fa-birthday-cake"></i><span>bolo naked de camadas</span></div>
+        <div class="menu-item"><i class="fas fa-lemon"></i><span>limonada rosé</span></div>
+        <div class="menu-item"><i class="fas fa-mug-saucer"></i><span>chá gelado de frutas</span></div>
+        <div class="menu-item"><i class="fas fa-sandwich"></i><span>sanduíches delicados</span></div>
+        <div class="menu-item"><i class="fas fa-cookie"></i><span>biscoitinhos de flor 🌸</span></div>
       </div>
     </div>
+  </section>
 
-  
-  <!-- Back to Top Button -->
-  <a href="#" class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
-  </a>
-  
-  <!-- Chatbot Modal -->
+  <!-- ATIVIDADE PRINCIPAL -->
+  <section class="section">
+    <div class="atividade-card">
+      <div class="atividade-titulo">
+        <i class="fas fa-paint-brush" style="color:#b8576e;"></i>
+        <span>ATIVIDADE PRINCIPAL</span>
+        <i class="fas fa-seedling" style="color:#256f5e;"></i>
+      </div>
+      <div class="subtitulo-oficina">🌷 Oficina: Plantar + Pintando Vasos</div>
+      
+      <div class="plantar-opcoes">
+        <p style="font-size:1.3rem; font-weight:600; color:#4b6b52; text-align:center; margin-bottom:1rem;">✨ Depois de pintar:</p>
+        <div class="opcoes-list">
+          <div class="opcao-item"><i class="fas fa-flower"></i> Plantar mudinha da flor favorita</div>
+          <div class="opcao-item"><i class="fas fa-leaf"></i> Suculenta</div>
+          <div class="opcao-item"><i class="fas fa-spa"></i> Hortelã</div>
+          <div class="opcao-item"><i class="fas fa-plant-wilt"></i> Alecrim</div>
+          <div class="opcao-item"><i class="fas fa-seedling"></i> Colocar sementes p/ germinar</div>
+        </div>
+      </div>
+
+      <div class="tema-dia-box">
+        <h4>🌿 “Floresça – Seja Solo Fértil”</h4>
+        <p>Baseado na parábola do semeador em <strong>Mateus 13:3-9</strong></p>
+      </div>
+
+      <div class="versiculo-destaque">
+        <i class="fas fa-bible" style="color:#6b4f3a; margin-right:8px;"></i>
+        <strong>Versículo-chave:</strong> Mateus 13:23 — “E quanto à semente que caiu em boa terra, esse é o caso daquele que ouve a palavra e a entende, e dá uma colheita de cem, sessenta e trinta por um.”
+      </div>
+    </div>
+  </section>
+
+ <!-- FOTOS DO GRUPO -->
+  <section class="grupo-fotos">
+    <h2 class="section__title"><i class="fas fa-camera-retro"></i> grupo GDC</h2>
+    <p style="text-align:center; margin-bottom:0.5rem;">nossos registros especiais</p>
+    <div class="fotos-grid" id="fotosGrid">
+      <div class="foto-item"><img src="m.jpg" alt="Foto 1" onerror="this.src='https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="oi.jpg" alt="Foto 2" onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="b.jpg" alt="Foto 3" onerror="this.src='https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="amg.jpg" alt="Foto 4" onerror="this.src='https://images.unsplash.com/photo-1536640712-4d4c36ff0e4e?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="i.jpg" alt="Foto 5" onerror="this.src='https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="h.jpg" alt="Foto 6" onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=150&h=150&fit=crop'"></div>
+    </div>
+    <p style="text-align:center; margin-top:1rem; font-style:italic;">Fotinhoos🌸</p>
+  </section>
+
+  <!-- cores PANTONE -->
+  <div class="palette-wrapper">
+    <div class="palette-title">🌸 cores do jardim (dress code) 🌸</div>
+    <div class="color-swatch">
+      <div class="swatch"><div class="swatch-circle" style="background:#b8576e;"></div><span class="swatch-name">PANTONE 493 C</span></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#256f5e;"></div><span class="swatch-name">PANTONE 7735 C</span></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#c5a582;"></div><span class="swatch-name">PANTONE 7508 C</span></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#6b6f4a;"></div><span class="swatch-name">PANTONE 5845 C</span></div>
+    </div>
+    <p style="margin-top:1rem; font-style:italic;">vestidos florais, saias leves, laços e dourado</p>
+  </div>
+
+  <!-- chatbot flora -->
   <div class="chatbot-container">
-    <button class="chatbot-button" id="chatbotButton">
-      <i class="fas fa-robot"></i>
-    </button>
-    
+    <button class="chatbot-button" id="chatbotButton">🌼</button>
     <div class="chatbot-modal" id="chatbotModal">
-      <div class="chatbot-window">
-        <div class="chatbot-header">
-          <h3>Assistente Virtual</h3>
-          <button class="chatbot-close" id="chatbotClose">×</button>
-        </div>
-        
-        <div class="chatbot-messages" id="chatbotMessages">
-          <div class="message bot-message">
-            Olá! Sou o assistente virtual de reciclagem de Caçapava. Como posso ajudar?
-          </div>
-          <div class="message bot-message">
-            Posso te informar sobre:
-            <br>1. Pontos de coleta
-            <br>2. Materiais aceitos
-            <br>3. Horários de funcionamento
-            <br>4. Outras dúvidas (ex.: segurança, privacidade, processo de reciclagem)
-          </div>
-        </div>
-        
-        <div class="chatbot-input">
-          <input type="text" id="chatbotInput" placeholder="Digite sua mensagem..." autocomplete="off">
-          <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
-        </div>
+      <div class="chatbot-header">
+        <h3><i class="fas fa-robot"></i> flora</h3>
+        <button class="chatbot-close" id="chatbotClose">×</button>
+      </div>
+      <div class="chatbot-messages" id="chatbotMessages">
+        <div class="bot-message">🌸 14 mar · 15h00 (a definir) – R. Todas as Nações, s/n, Vila Tatetuba.</div>
+        <div class="bot-message">🍓 Lanchinhos: morangos, cupcakes florais, naked cake, limonada rosé, chá gelado, sanduíches delicados e biscoitinhos de flor.</div>
+        <div class="bot-message">🎨 Atividade: Pintar vasos + plantar mudinha (flor, suculenta, hortelã, alecrim ou sementes). Tema: “Floresça – Solo Fértil” (Mateus 13).</div>
+        <div class="bot-message">👗 Dress code cores PANTONE: 493 C · 7735 C · 7508 C · 5845 C. Vestidos florais, laços, dourado.</div>
+        <div class="bot-message">📞 Líder: +55 12 98188-1144 (whatsapp)</div>
+      </div>
+      <div class="chatbot-input">
+        <input type="text" id="chatbotInput" placeholder="ex: atividade, endereço..." />
+        <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
       </div>
     </div>
   </div>
 
-  <!-- Leaflet JS -->
+  <a href="#" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
+
+  <footer>
+    <div style="font-size: 2.5rem; letter-spacing: 8px;">🌱🌿🌸🌻</div>
+    <p style="margin: 1.2rem 0 0.5rem;">bloom gardening · festa da amiga · solo fértil · mateus 13:23</p>
+    <p>R. Todas as Nações, s/n - Vila Tatetuba, São José dos Campos</p>
+    <p style="margin-top: 0.8rem;">🍓 14 março · 15h00 (horário a definir)</p>
+  </footer>
+
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  
-  <!-- JavaScript -->
-  <script src="script.js"></script>
+  <script>
+    (function() {
+      // Coordenadas: -23.193686, -45.858650
+      const lat = -23.193686;
+      const lng = -45.858650;
+      const map = L.map('map').setView([lat, lng], 16);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+      
+      const iconFlor = L.icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+        shadowSize: [41, 41]
+      });
+
+      const endereco = "R. Todas as Nações, s/n - Vila Tatetuba, São José dos Campos - SP, 12220-612";
+      L.marker([lat, lng], { icon: iconFlor }).addTo(map)
+        .bindPopup(`<b>🌸 Bloom Gardening</b><br>${endereco}<br>14 mar · 15h00 (a definir)`)
+        .openPopup();
+
+      // chatbot
+      const chatBtn = document.getElementById('chatbotButton');
+      const modal = document.getElementById('chatbotModal');
+      const closeBtn = document.getElementById('chatbotClose');
+      const msgDiv = document.getElementById('chatbotMessages');
+      const inputField = document.getElementById('chatbotInput');
+      const sendBtn = document.getElementById('chatbotSend');
+
+      function toggleModal() { modal.classList.toggle('active'); }
+      chatBtn.addEventListener('click', toggleModal);
+      closeBtn.addEventListener('click', toggleModal);
+      window.addEventListener('click', (e) => { if (e.target === modal) toggleModal(); });
+
+      function addMessage(text, sender) {
+        const d = document.createElement('div');
+        d.className = `message ${sender}-message`;
+        d.innerHTML = text.replace(/\n/g,'<br>');
+        msgDiv.appendChild(d);
+        msgDiv.scrollTop = msgDiv.scrollHeight;
+      }
+
+      function botReply(pergunta) {
+        const lower = pergunta.toLowerCase();
+        if (/endereço|local|onde|chegar/i.test(lower)) return "📍 R. Todas as Nações, s/n - Vila Tatetuba, SJC. Link de rota no mapa!";
+        if (/data|dia|quando|14|março|horário/i.test(lower)) return "📅 14 de março, 15h00 (horário a definir)";
+        if (/comida|mesa|lanche|frutas|bolo|sanduíche|morango|limonada|chá|biscoito/i.test(lower)) 
+          return "🍓 Ideias de lanchinhos: morangos, cupcakes florais, naked cake, limonada rosé, chá gelado, sanduíches delicados e biscoitinhos de flor.";
+        if (/atividade|oficina|pintar|vaso|plantar|mudinha|suculenta|hortelã|alecrim|semente/i.test(lower)) 
+          return "🎨 Oficina: Pintar vasos e depois plantar: flor favorita, suculenta, hortelã, alecrim ou colocar sementes p/ germinar. Tema: “Floresça – Seja Solo Fértil” (Mateus 13).";
+        if (/look|vestir|dress code|roupa|cor|pantone|paleta|cores/i.test(lower)) 
+          return "👗 Dress code: Jardim de Primavera. Cores PANTONE: 493 C (rosa), 7735 C (verde petróleo), 7508 C (bege), 5845 C (verde oliva). Use vestidos florais, laços e dourado.";
+        if (/contato|líder|whatsapp|telefone|98188|1144/i.test(lower)) 
+          return "📞 Líder: +55 12 98188-1144 (whatsapp)";
+        return "🌼 Pergunte sobre: data, endereço, lanchinhos, atividade (pintura/plantio), dress code (cores PANTONE) ou contato da líder.";
+      }
+
+      function sendMessage() {
+        const txt = inputField.value.trim();
+        if (!txt) return;
+        addMessage(txt, 'user');
+        inputField.value = '';
+        setTimeout(() => {
+          const resposta = botReply(txt);
+          addMessage(resposta, 'bot');
+        }, 300);
+      }
+
+      sendBtn.addEventListener('click', sendMessage);
+      inputField.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+
+      // back to top
+      const topBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 350) topBtn.classList.add('show');
+        else topBtn.classList.remove('show');
+      });
+      topBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+  </script>
 </body>
 </html>

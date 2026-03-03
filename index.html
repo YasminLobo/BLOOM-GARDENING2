@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
   <title>Bloom Gardening · Festa da Amiga</title>
-  <!-- Ícone personalizado da aba (logo.png) -->
   <link rel="icon" href="fit.png" type="image/png" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -36,10 +36,21 @@
       --pantone-5845: #6b6f4a;
     }
 
-    h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
-    h2 { font-size: clamp(1.8rem, 6vw, 2.5rem); }
-    h3 { font-size: clamp(1.5rem, 5vw, 2rem); }
-    p { font-size: clamp(1rem, 4vw, 1.2rem); }
+    h1 {
+      font-size: clamp(2.2rem, 8vw, 3.5rem);
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+
+    h3 {
+      font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+
+    p {
+      font-size: clamp(1rem, 4vw, 1.2rem);
+    }
 
     .section {
       padding: 2rem 1.2rem;
@@ -58,6 +69,7 @@
       gap: 0.5rem;
       flex-wrap: wrap;
     }
+
     .section__title i {
       color: var(--pantone-493);
       font-size: 1.8rem;
@@ -73,7 +85,6 @@
       overflow: hidden;
     }
 
-    /* Container das florzinhas flutuantes */
     .floating-flowers {
       position: absolute;
       top: 0;
@@ -91,26 +102,69 @@
       animation: floatFlower 12s ease-in-out infinite;
     }
 
-    /* Posições e delays diferentes para cada flor */
-    .floating-flower:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
-    .floating-flower:nth-child(2) { top: 70%; right: 8%; animation-delay: 2s; }
-    .floating-flower:nth-child(3) { bottom: 15%; left: 15%; animation-delay: 4s; }
-    .floating-flower:nth-child(4) { top: 40%; right: 20%; animation-delay: 1s; }
-    .floating-flower:nth-child(5) { bottom: 30%; right: 30%; animation-delay: 5s; }
-    .floating-flower:nth-child(6) { top: 80%; left: 25%; animation-delay: 3s; }
-    .floating-flower:nth-child(7) { top: 20%; right: 40%; animation-delay: 6s; }
-    .floating-flower:nth-child(8) { bottom: 40%; left: 40%; animation-delay: 2.5s; }
+    .floating-flower:nth-child(1) {
+      top: 10%;
+      left: 5%;
+      animation-delay: 0s;
+    }
+
+    .floating-flower:nth-child(2) {
+      top: 70%;
+      right: 8%;
+      animation-delay: 2s;
+    }
+
+    .floating-flower:nth-child(3) {
+      bottom: 15%;
+      left: 15%;
+      animation-delay: 4s;
+    }
+
+    .floating-flower:nth-child(4) {
+      top: 40%;
+      right: 20%;
+      animation-delay: 1s;
+    }
+
+    .floating-flower:nth-child(5) {
+      bottom: 30%;
+      right: 30%;
+      animation-delay: 5s;
+    }
+
+    .floating-flower:nth-child(6) {
+      top: 80%;
+      left: 25%;
+      animation-delay: 3s;
+    }
+
+    .floating-flower:nth-child(7) {
+      top: 20%;
+      right: 40%;
+      animation-delay: 6s;
+    }
+
+    .floating-flower:nth-child(8) {
+      bottom: 40%;
+      left: 40%;
+      animation-delay: 2.5s;
+    }
 
     @keyframes floatFlower {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translateY(0) translateX(0) rotate(0deg);
       }
+
       25% {
         transform: translateY(-10px) translateX(5px) rotate(5deg);
       }
+
       50% {
         transform: translateY(-15px) translateX(-5px) rotate(-5deg);
       }
+
       75% {
         transform: translateY(-5px) translateX(8px) rotate(3deg);
       }
@@ -173,7 +227,6 @@
       margin-right: auto;
     }
 
-    /* canteiro estático (as plantinhas não mexem) */
     .garden-bed {
       background: #8b6f50;
       height: 130px;
@@ -193,7 +246,6 @@
       filter: drop-shadow(0 5px 4px #25432e);
     }
 
-    /* card de comida */
     .menu-card {
       background: #fffaf2;
       border-radius: 50px 15px 50px 15px;
@@ -203,11 +255,6 @@
       max-width: 700px;
       margin: 2rem auto;
       width: 100%;
-      transition: box-shadow 0.2s;
-    }
-
-    .menu-card:hover {
-      box-shadow: 0 18px 0 #b59d84, 0 12px 25px rgba(0, 0, 0, 0.15);
     }
 
     .menu-card h3 {
@@ -261,7 +308,6 @@
       text-align: center;
     }
 
-    /* ATIVIDADE PRINCIPAL */
     .atividade-card {
       background: #e6dccb;
       border-radius: 60px 15px 60px 15px;
@@ -327,11 +373,6 @@
       border: 2px solid #c8ab8e;
     }
 
-    .opcao-item i {
-      color: var(--pantone-493);
-      font-size: 1.4rem;
-    }
-
     .tema-dia-box {
       background: var(--pantone-7508);
       padding: 1.2rem;
@@ -339,18 +380,6 @@
       text-align: center;
       margin: 1.8rem 0 0.8rem;
       border: 4px solid #fff3d1;
-    }
-
-    .tema-dia-box h4 {
-      font-size: clamp(1.5rem, 5vw, 2.2rem);
-      color: #1d482b;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .tema-dia-box p {
-      font-size: 1.1rem;
-      color: #2d4b35;
     }
 
     .versiculo-destaque {
@@ -362,7 +391,6 @@
       margin-top: 1.2rem;
     }
 
-    /* espaço fotos grupo */
     .grupo-fotos {
       background: #ede0cf;
       border-radius: 60px 10px 60px 10px;
@@ -379,7 +407,6 @@
       gap: 1rem;
       justify-content: center;
       margin-top: 1.5rem;
-      min-height: 150px;
       background: #fbf2e6;
       border-radius: 50px 8px 50px 8px;
       padding: 1.5rem 0.8rem;
@@ -403,7 +430,6 @@
       display: block;
     }
 
-    /* cores PANTONE */
     .palette-wrapper {
       margin: 2.5rem 0 1rem;
       text-align: center;
@@ -427,19 +453,13 @@
       gap: 15px 20px;
     }
 
-    .swatch {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
-    }
-
     .swatch-circle {
       width: clamp(60px, 20vw, 75px);
       height: clamp(60px, 20vw, 75px);
       border-radius: 50% 20% 50% 20%;
       box-shadow: 0 6px 0 #3e5b41;
       border: 3px solid #f9e7d4;
+      margin-bottom: 5px;
     }
 
     .swatch-name {
@@ -448,7 +468,6 @@
       color: #463a2e;
     }
 
-    /* mapa */
     .map-wrapper {
       background: #ccb99e;
       border-radius: 60px 8px 60px 8px;
@@ -462,7 +481,7 @@
       height: 280px;
       width: 100%;
       border-radius: 40px 8px 40px 8px;
-      border: 4px solid var(--pantone-7508);
+      border: 4px solid white;
       box-shadow: 0 10px 0 #38634c;
     }
 
@@ -474,7 +493,6 @@
       text-align: center;
       border: 3px dashed var(--pantone-493);
       font-size: clamp(1rem, 4vw, 1.2rem);
-      word-break: break-word;
     }
 
     .btn-rota {
@@ -489,7 +507,6 @@
       box-shadow: 0 6px 0 #1d4d3a;
       display: inline-block;
       margin: 0.8rem 0 0.2rem;
-      width: fit-content;
     }
 
     /* chatbot */
@@ -522,6 +539,7 @@
       background: #fff9ef;
       border: 4px solid var(--pantone-5845);
       border-radius: 35px 8px 35px 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     }
 
     .chatbot-modal.active {
@@ -538,21 +556,6 @@
       color: white;
     }
 
-    .chatbot-header h3 {
-      font-size: 1.3rem;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .chatbot-close {
-      background: none;
-      border: none;
-      font-size: 2rem;
-      color: white;
-      cursor: pointer;
-    }
-
     .chatbot-messages {
       padding: 1rem;
       max-height: 260px;
@@ -563,7 +566,7 @@
     .bot-message {
       background: #eddac8;
       padding: 0.7rem;
-      border-radius: 20px 5px 20px 5px;
+      border-radius: 15px 15px 15px 0;
       margin-bottom: 10px;
       border: 1px solid #b3826a;
     }
@@ -571,7 +574,7 @@
     .user-message {
       background: #c5d9c0;
       padding: 0.7rem;
-      border-radius: 5px 20px 5px 20px;
+      border-radius: 15px 15px 0 15px;
       margin-bottom: 10px;
       text-align: right;
       border: 1px solid #63855c;
@@ -587,7 +590,6 @@
       padding: 0.7rem;
       border: none;
       border-radius: 0 0 0 15px;
-      font-size: 0.95rem;
     }
 
     .chatbot-input button {
@@ -595,9 +597,7 @@
       border: none;
       padding: 0 1rem;
       color: white;
-      font-size: 1.2rem;
       border-radius: 0 0 15px 0;
-      cursor: pointer;
     }
 
     .back-to-top {
@@ -608,17 +608,14 @@
       color: white;
       width: 45px;
       height: 45px;
-      border-radius: 25px 5px 25px 5px;
+      border-radius: 25px 5px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.6rem;
-      box-shadow: 0 5px 0 #334e38;
       text-decoration: none;
-      z-index: 98;
       opacity: 0;
-      transition: opacity 0.2s;
       pointer-events: none;
+      transition: 0.3s;
     }
 
     .back-to-top.show {
@@ -633,85 +630,74 @@
       text-align: center;
       border-top: 8px solid var(--pantone-493);
       margin-top: 2rem;
-      width: 100%;
     }
   </style>
 </head>
+
 <body>
-  <!-- CAPA COM FLORZINHAS MEXENDO -->
+
   <section class="hero">
-    <!-- Florzinhas flutuantes (APENAS ELAS SE MEXEM) -->
     <div class="floating-flowers">
-      <span class="floating-flower">🌱</span>
-      <span class="floating-flower">🌸</span>
-      <span class="floating-flower">🌼</span>
-      <span class="floating-flower">🌻</span>
-      <span class="floating-flower">🌿</span>
-      <span class="floating-flower">🌷</span>
-      <span class="floating-flower">🌺</span>
-      <span class="floating-flower">🍃</span>
+      <span class="floating-flower">🌱</span><span class="floating-flower">🌸</span>
+      <span class="floating-flower">🌼</span><span class="floating-flower">🌻</span>
+      <span class="floating-flower">🌿</span><span class="floating-flower">🌷</span>
+      <span class="floating-flower">🌺</span><span class="floating-flower">🍃</span>
     </div>
-    
+
     <div class="hero-card">
       <h1>BLOOM <span>GARDENING</span></h1>
       <div class="verse-box">
-        “E QUANTO À SEMENTE QUE CAIU EM BOA TERRA, ESSE É O CASO DAQUELE QUE OUVE A PALAVRA E A ENTENDE. E DÁ UMA COLHEITA DE CEM, SESSENTA E TRINTA POR UM”.
+        “E QUANTO À SEMENTE QUE CAIU EM BOA TERRA, ESSE É O CASO DAQUELE QUE OUVE A PALAVRA E A ENTENDE. E DÁ UMA
+        COLHEITA DE CEM, SESSENTA E TRINTA POR UM”.
         <div style="font-size:0.9rem; margin-top:8px;">MATEUS 13:23</div>
       </div>
-      <div style="font-size:clamp(1.6rem, 6vw, 2rem); font-weight:600; color:#366946;">FLORESÇA · SOLO FÉRTIL</div>
+      <div style="font-size:clamp(1.6rem, 6vw, 2rem); font-weight:600; color:#366946; text-align: center;">FLORESÇA ·
+        SOLO FÉRTIL</div>
       <div class="data-horario">
-        <i class="fas fa-calendar-alt"></i> 14 março · 15h00 <span style="font-size:0.8em;">(HORÁRIO A DEFINIR)</span>
+        <i class="fas fa-calendar-alt"></i> 14 março · 15h00
       </div>
     </div>
   </section>
 
-  <!-- canteiro estático (as plantinhas NÃO mexem) -->
   <div class="garden-bed">
-    <span class="plant">🌱</span>
-    <span class="plant">🌿</span>
-    <span class="plant">🌸</span>
-    <span class="plant">🌻</span>
+    <span class="plant">🌱</span><span class="plant">🌿</span>
+    <span class="plant">🌸</span><span class="plant">🌻</span>
     <span class="plant">🌼</span>
   </div>
 
-  <!-- LOCAL (com coordenadas atualizadas) -->
   <section class="section">
     <h2 class="section__title"><i class="fas fa-map-pin"></i> onde florescer</h2>
     <div class="map-wrapper">
       <div id="map"></div>
       <div class="endereco-box">
         <i class="fas fa-location-dot" style="color:#b8576e;"></i>
-        <strong>R. Todas as Nações, s/n - Vila Tatetuba, São José dos Campos - SP, 12220-612</strong>
+        <strong>Igreja da Cidade - Campus Colina</strong><br>
+        R. Todas as Nações, s/n - Vila Tatetuba, São José dos Campos - SP
       </div>
       <div style="text-align:center;">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=R.+Todas+as+Nações,+s/n+-+Vila+Tatetuba,+São+José+dos+Campos+-+SP,+12220-612" target="_blank" class="btn-rota">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=-23.193686,-45.858650" target="_blank"
+          class="btn-rota">
           <i class="fas fa-directions"></i> traçar rota
         </a>
       </div>
     </div>
   </section>
 
-  <!-- CARD DE COMIDA -->
-  <section class="section" style="padding-top:0;">
+  <section class="section">
     <div class="menu-card">
-      <h3>
-        <i class="fas fa-strawberry"></i> mesa ao ar livre
-        <i class="fas fa-leaf"></i>
-      </h3>
+      <h3><i class="fas fa-strawberry"></i> mesa ao ar livre <i class="fas fa-leaf"></i></h3>
       <div class="menu-sub">✨ ideias de lanchinhos ✨</div>
       <div class="menu-items">
         <div class="menu-item"><i class="fas fa-seedling"></i><span>morangos frescos</span></div>
         <div class="menu-item"><i class="fas fa-cake"></i><span>cupcakes com flor</span></div>
-        <div class="menu-item"><i class="fas fa-birthday-cake"></i><span>bolo naked de camadas</span></div>
+        <div class="menu-item"><i class="fas fa-birthday-cake"></i><span>bolo naked</span></div>
         <div class="menu-item"><i class="fas fa-lemon"></i><span>limonada rosé</span></div>
-        <div class="menu-item"><i class="fas fa-mug-saucer"></i><span>chá gelado de frutas</span></div>
-        <div class="menu-item"><i class="fas fa-sandwich"></i><span>sanduíches delicados</span></div>
-        <div class="menu-item"><i class="fas fa-cookie"></i><span>biscoitinhos de flor 🌸</span></div>
+        <div class="menu-item"><i class="fas fa-mug-saucer"></i><span>chá gelado</span></div>
+        <div class="menu-item"><i class="fas fa-sandwich"></i><span>sanduíches</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ATIVIDADE PRINCIPAL -->
   <section class="section">
     <div class="atividade-card">
       <div class="atividade-titulo">
@@ -720,74 +706,73 @@
         <i class="fas fa-seedling" style="color:#256f5e;"></i>
       </div>
       <div class="subtitulo-oficina">🌷 Oficina: Plantar + Pintando Vasos</div>
-      
       <div class="plantar-opcoes">
-        <p style="font-size:1.3rem; font-weight:600; color:#4b6b52; text-align:center; margin-bottom:1rem;">✨ Depois de pintar:</p>
         <div class="opcoes-list">
-          <div class="opcao-item"><i class="fas fa-flower"></i> Plantar mudinha da flor favorita</div>
-          <div class="opcao-item"><i class="fas fa-leaf"></i> Suculenta</div>
-          <div class="opcao-item"><i class="fas fa-spa"></i> Hortelã</div>
-          <div class="opcao-item"><i class="fas fa-plant-wilt"></i> Alecrim</div>
-          <div class="opcao-item"><i class="fas fa-seedling"></i> Colocar sementes p/ germinar</div>
+          <div class="opcao-item">🌷 Flor favorita</div>
+          <div class="opcao-item">🌵 Suculenta</div>
+          <div class="opcao-item">🌿 Hortelã / Alecrim</div>
         </div>
       </div>
-
       <div class="tema-dia-box">
         <h4>🌿 “Floresça – Seja Solo Fértil”</h4>
-        <p>Baseado na parábola do semeador em <strong>Mateus 13:3-9</strong></p>
-      </div>
-
-      <div class="versiculo-destaque">
-        <i class="fas fa-bible" style="color:#6b4f3a; margin-right:8px;"></i>
-        <strong>Versículo-chave:</strong> Mateus 13:23 — “E quanto à semente que caiu em boa terra, esse é o caso daquele que ouve a palavra e a entende, e dá uma colheita de cem, sessenta e trinta por um.”
+        <p>Baseado em Mateus 13:3-9</p>
       </div>
     </div>
   </section>
 
- <!-- FOTOS DO GRUPO -->
+  <!-- FOTOS DO GRUPO -->
   <section class="grupo-fotos">
     <h2 class="section__title"><i class="fas fa-camera-retro"></i> grupo GDC</h2>
     <p style="text-align:center; margin-bottom:0.5rem;">nossos registros especiais</p>
     <div class="fotos-grid" id="fotosGrid">
-      <div class="foto-item"><img src="m.jpg" alt="Foto 1" onerror="this.src='https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=150&h=150&fit=crop'"></div>
-      <div class="foto-item"><img src="oi.jpg" alt="Foto 2" onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=150&h=150&fit=crop'"></div>
-      <div class="foto-item"><img src="b.jpg" alt="Foto 3" onerror="this.src='https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=150&h=150&fit=crop'"></div>
-      <div class="foto-item"><img src="amg.jpg" alt="Foto 4" onerror="this.src='https://images.unsplash.com/photo-1536640712-4d4c36ff0e4e?w=150&h=150&fit=crop'"></div>
-      <div class="foto-item"><img src="i.jpg" alt="Foto 5" onerror="this.src='https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=150&h=150&fit=crop'"></div>
-      <div class="foto-item"><img src="h.jpg" alt="Foto 6" onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="m.jpg" alt="Foto 1"
+          onerror="this.src='https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="oi.jpg" alt="Foto 2"
+          onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="b.jpg" alt="Foto 3"
+          onerror="this.src='https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="amg.jpg" alt="Foto 4"
+          onerror="this.src='https://images.unsplash.com/photo-1536640712-4d4c36ff0e4e?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="i.jpg" alt="Foto 5"
+          onerror="this.src='https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="h.jpg" alt="Foto 6"
+          onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=150&h=150&fit=crop'"></div>
     </div>
     <p style="text-align:center; margin-top:1rem; font-style:italic;">Fotinhoos🌸</p>
   </section>
 
-  <!-- cores PANTONE -->
   <div class="palette-wrapper">
     <div class="palette-title">🌸 cores do jardim (dress code) 🌸</div>
     <div class="color-swatch">
-      <div class="swatch"><div class="swatch-circle" style="background:#b8576e;"></div><span class="swatch-name">PANTONE 493 C</span></div>
-      <div class="swatch"><div class="swatch-circle" style="background:#256f5e;"></div><span class="swatch-name">PANTONE 7735 C</span></div>
-      <div class="swatch"><div class="swatch-circle" style="background:#c5a582;"></div><span class="swatch-name">PANTONE 7508 C</span></div>
-      <div class="swatch"><div class="swatch-circle" style="background:#6b6f4a;"></div><span class="swatch-name">PANTONE 5845 C</span></div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background:#b8576e;"></div><span class="swatch-name"></span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background:#256f5e;"></div><span class="swatch-name"></span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background:#c5a582;"></div><span class="swatch-name"></span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background:#6b6f4a;"></div><span class="swatch-name"></span>
+      </div>
     </div>
-    <p style="margin-top:1rem; font-style:italic;">vestidos florais, saias leves, laços e dourado</p>
   </div>
 
-  <!-- chatbot flora -->
   <div class="chatbot-container">
     <button class="chatbot-button" id="chatbotButton">🌼</button>
     <div class="chatbot-modal" id="chatbotModal">
       <div class="chatbot-header">
         <h3><i class="fas fa-robot"></i> flora</h3>
-        <button class="chatbot-close" id="chatbotClose">×</button>
+        <button id="chatbotClose"
+          style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
       </div>
       <div class="chatbot-messages" id="chatbotMessages">
-        <div class="bot-message">🌸 14 mar · 15h00 (a definir) – R. Todas as Nações, s/n, Vila Tatetuba.</div>
-        <div class="bot-message">🍓 Lanchinhos: morangos, cupcakes florais, naked cake, limonada rosé, chá gelado, sanduíches delicados e biscoitinhos de flor.</div>
-        <div class="bot-message">🎨 Atividade: Pintar vasos + plantar mudinha (flor, suculenta, hortelã, alecrim ou sementes). Tema: “Floresça – Solo Fértil” (Mateus 13).</div>
-        <div class="bot-message">👗 Dress code cores PANTONE: 493 C · 7735 C · 7508 C · 5845 C. Vestidos florais, laços, dourado.</div>
-        <div class="bot-message">📞 Líder: +55 12 98188-1144 (whatsapp)</div>
+        <div class="bot-message">Oi! Sou a Flora! 🌸 Posso te ajudar com o endereço, horário, o que comer ou o look do
+          dia!</div>
       </div>
       <div class="chatbot-input">
-        <input type="text" id="chatbotInput" placeholder="ex: atividade, endereço..." />
+        <input type="text" id="chatbotInput" placeholder="Sua dúvida..." />
         <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
       </div>
     </div>
@@ -797,35 +782,29 @@
 
   <footer>
     <div style="font-size: 2.5rem; letter-spacing: 8px;">🌱🌿🌸🌻</div>
-    <p style="margin: 1.2rem 0 0.5rem;">bloom gardening · festa da amiga · solo fértil · mateus 13:23</p>
-    <p>R. Todas as Nações, s/n - Vila Tatetuba, São José dos Campos</p>
-    <p style="margin-top: 0.8rem;">🍓 14 março · 15h00 (horário a definir)</p>
+    <p>bloom gardening · festa da amiga · solo fértil</p>
+    <p>Igreja da Cidade - Campus Colina</p>
   </footer>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    (function() {
-      // Coordenadas: -23.193686, -45.858650
+    (function () {
+      // MAPA
       const lat = -23.193686;
       const lng = -45.858650;
       const map = L.map('map').setView([lat, lng], 16);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
-      
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
       const iconFlor = L.icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-        shadowSize: [41, 41]
+        iconSize: [25, 41], iconAnchor: [12, 41]
       });
 
-      const endereco = "R. Todas as Nações, s/n - Vila Tatetuba, São José dos Campos - SP, 12220-612";
       L.marker([lat, lng], { icon: iconFlor }).addTo(map)
-        .bindPopup(`<b>🌸 Bloom Gardening</b><br>${endereco}<br>14 mar · 15h00 (a definir)`)
+        .bindPopup("<b>🌸 Campus Colina</b><br>Bloom Gardening")
         .openPopup();
 
-      // chatbot
+      // CHATBOT
       const chatBtn = document.getElementById('chatbotButton');
       const modal = document.getElementById('chatbotModal');
       const closeBtn = document.getElementById('chatbotClose');
@@ -833,59 +812,53 @@
       const inputField = document.getElementById('chatbotInput');
       const sendBtn = document.getElementById('chatbotSend');
 
-      function toggleModal() { modal.classList.toggle('active'); }
-      chatBtn.addEventListener('click', toggleModal);
-      closeBtn.addEventListener('click', toggleModal);
-      window.addEventListener('click', (e) => { if (e.target === modal) toggleModal(); });
+      chatBtn.onclick = () => modal.classList.toggle('active');
+      closeBtn.onclick = () => modal.classList.remove('active');
 
       function addMessage(text, sender) {
         const d = document.createElement('div');
-        d.className = `message ${sender}-message`;
-        d.innerHTML = text.replace(/\n/g,'<br>');
+        d.className = `${sender}-message`;
+        d.innerHTML = text;
         msgDiv.appendChild(d);
         msgDiv.scrollTop = msgDiv.scrollHeight;
       }
 
-      function botReply(pergunta) {
-        const lower = pergunta.toLowerCase();
-        if (/endereço|local|onde|chegar/i.test(lower)) return "📍 R. Todas as Nações, s/n - Vila Tatetuba, SJC. Link de rota no mapa!";
-        if (/data|dia|quando|14|março|horário/i.test(lower)) return "📅 14 de março, 15h00 (horário a definir)";
-        if (/comida|mesa|lanche|frutas|bolo|sanduíche|morango|limonada|chá|biscoito/i.test(lower)) 
-          return "🍓 Ideias de lanchinhos: morangos, cupcakes florais, naked cake, limonada rosé, chá gelado, sanduíches delicados e biscoitinhos de flor.";
-        if (/atividade|oficina|pintar|vaso|plantar|mudinha|suculenta|hortelã|alecrim|semente/i.test(lower)) 
-          return "🎨 Oficina: Pintar vasos e depois plantar: flor favorita, suculenta, hortelã, alecrim ou colocar sementes p/ germinar. Tema: “Floresça – Seja Solo Fértil” (Mateus 13).";
-        if (/look|vestir|dress code|roupa|cor|pantone|paleta|cores/i.test(lower)) 
-          return "👗 Dress code: Jardim de Primavera. Cores PANTONE: 493 C (rosa), 7735 C (verde petróleo), 7508 C (bege), 5845 C (verde oliva). Use vestidos florais, laços e dourado.";
-        if (/contato|líder|whatsapp|telefone|98188|1144/i.test(lower)) 
-          return "📞 Líder: +55 12 98188-1144 (whatsapp)";
-        return "🌼 Pergunte sobre: data, endereço, lanchinhos, atividade (pintura/plantio), dress code (cores PANTONE) ou contato da líder.";
+      function getBotReply(msg) {
+        const t = msg.toLowerCase();
+        // Dicas exclusivas no Chatbot
+        if (t.includes("levar") || t.includes("trazer") || t.includes("levar?") || t.includes("dica")) {
+          return "✨ <b>Anote as dicas:</b> Como teremos atividades práticas, recomendo trazer <b>Muita criatividade, </b> <b>sementes,</b> Tintas e Pincéis !. Se você tiver uma <b>prazinha de jardinagem</b> favorita, pode trazer também! 🌸";
+        }
+        if (t.includes("roupa") || t.includes("vestir") || t.includes("look")) {
+          return "👗 O Dress Code é <b>Jardim de Primavera</b>! Sinta-se à vontade para usar tons de Rosa, Verde ou Bege. Vá com algo confortável para aproveitar o dia!";
+        }
+        if (t.includes("comer") || t.includes("comida") || t.includes("cardápio")) {
+          return "🍓 Teremos um picnic delicioso com  morangos, sanduíches naturais e limonada";
+        }
+        if (t.includes("onde") || t.includes("local") || t.includes("rota")) return "📍 É na Igreja da Cidade - Campus Colina! Clique no botão 'Traçar Rota' no mapa para abrir o GPS!";
+
+        return "🌼 Você pode me perguntar 'O que devo levar?', sobre o 'Dress Code', onde será ou sobre a 'Comida'!";
       }
 
-      function sendMessage() {
-        const txt = inputField.value.trim();
-        if (!txt) return;
-        addMessage(txt, 'user');
+      function handleSend() {
+        const val = inputField.value.trim();
+        if (!val) return;
+        addMessage(val, 'user');
         inputField.value = '';
-        setTimeout(() => {
-          const resposta = botReply(txt);
-          addMessage(resposta, 'bot');
-        }, 300);
+        setTimeout(() => addMessage(getBotReply(val), 'bot'), 500);
       }
 
-      sendBtn.addEventListener('click', sendMessage);
-      inputField.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+      sendBtn.onclick = handleSend;
+      inputField.onkeypress = (e) => { if (e.key === 'Enter') handleSend(); };
 
-      // back to top
+      // BACK TO TOP
       const topBtn = document.getElementById('backToTop');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 350) topBtn.classList.add('show');
+      window.onscroll = () => {
+        if (window.scrollY > 300) topBtn.classList.add('show');
         else topBtn.classList.remove('show');
-      });
-      topBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+      };
     })();
   </script>
 </body>
+
 </html>

@@ -10,627 +10,77 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: #faf3ea;
-      font-family: 'Quicksand', sans-serif;
-      color: #2b4b3a;
-      width: 100%;
-      overflow-x: hidden;
-    }
-
-    :root {
-      --primary-green: #5b8c6f;
-      --soft-pink: #f3cfc3;
-      --dark-soil: #6b4f3a;
-      --medium-soil: #b59d84;
-      --light-sand: #e8ddcf;
-      --pantone-493: #b8576e;
-      --pantone-7735: #256f5e;
-      --pantone-7508: #c5a582;
-      --pantone-5845: #6b6f4a;
-    }
-
-    h1 {
-      font-size: clamp(2.2rem, 8vw, 3.5rem);
-    }
-
-    h2 {
-      font-size: clamp(1.8rem, 6vw, 2.5rem);
-    }
-
-    h3 {
-      font-size: clamp(1.5rem, 5vw, 2rem);
-    }
-
-    p {
-      font-size: clamp(1rem, 4vw, 1.2rem);
-    }
-
-    .section {
-      padding: 2rem 1.2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .section__title {
-      text-align: center;
-      color: var(--primary-green);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .section__title i {
-      color: var(--pantone-493);
-      font-size: 1.8rem;
-    }
-
-    /* ===== CAPA COM FLORZINHAS MEXENDO ===== */
-    .hero {
-      background: linear-gradient(145deg, #2a5e45 0%, #4b7b63 50%, #699e7a 100%);
-      padding: 2.5rem 1rem 3.5rem;
-      border-bottom: 6px solid var(--pantone-493);
-      width: 100%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .floating-flowers {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .floating-flower {
-      position: absolute;
-      font-size: 2.5rem;
-      opacity: 0.25;
-      animation: floatFlower 12s ease-in-out infinite;
-    }
-
-    .floating-flower:nth-child(1) {
-      top: 10%;
-      left: 5%;
-      animation-delay: 0s;
-    }
-
-    .floating-flower:nth-child(2) {
-      top: 70%;
-      right: 8%;
-      animation-delay: 2s;
-    }
-
-    .floating-flower:nth-child(3) {
-      bottom: 15%;
-      left: 15%;
-      animation-delay: 4s;
-    }
-
-    .floating-flower:nth-child(4) {
-      top: 40%;
-      right: 20%;
-      animation-delay: 1s;
-    }
-
-    .floating-flower:nth-child(5) {
-      bottom: 30%;
-      right: 30%;
-      animation-delay: 5s;
-    }
-
-    .floating-flower:nth-child(6) {
-      top: 80%;
-      left: 25%;
-      animation-delay: 3s;
-    }
-
-    .floating-flower:nth-child(7) {
-      top: 20%;
-      right: 40%;
-      animation-delay: 6s;
-    }
-
-    .floating-flower:nth-child(8) {
-      bottom: 40%;
-      left: 40%;
-      animation-delay: 2.5s;
-    }
-
-    @keyframes floatFlower {
-
-      0%,
-      100% {
-        transform: translateY(0) translateX(0) rotate(0deg);
-      }
-
-      25% {
-        transform: translateY(-10px) translateX(5px) rotate(5deg);
-      }
-
-      50% {
-        transform: translateY(-15px) translateX(-5px) rotate(-5deg);
-      }
-
-      75% {
-        transform: translateY(-5px) translateX(8px) rotate(3deg);
-      }
-    }
-
-    .hero-card {
-      background: rgba(255, 251, 240, 0.92);
-      backdrop-filter: blur(3px);
-      max-width: 850px;
-      margin: 0 auto;
-      padding: 2.5rem 2rem;
-      border-radius: 70px 20px 70px 20px;
-      border: 4px solid var(--soft-pink);
-      box-shadow: 0 25px 30px -10px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 245, 220, 0.5) inset;
-      position: relative;
-      z-index: 10;
-    }
-
-    .hero h1 {
-      color: #2b6b4a;
-      font-weight: 700;
-      line-height: 1.2;
-      text-align: center;
-      text-shadow: 2px 2px 0 rgba(255, 245, 220, 0.8);
-    }
-
-    .hero h1 span {
-      color: #b65b4a;
-      font-size: 0.8em;
-      display: block;
-    }
-
-    .verse-box {
-      font-weight: 500;
-      color: #3d5e4b;
-      border-top: 3px double var(--pantone-493);
-      border-bottom: 3px double var(--pantone-493);
-      padding: 1.3rem 1rem;
-      margin: 2rem 0 1.5rem;
-      background: rgba(250, 240, 230, 0.7);
-      border-radius: 40px 10px 40px 10px;
-      font-size: clamp(1rem, 3.5vw, 1.3rem);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    }
-
-    .data-horario {
-      background: var(--pantone-7508);
-      display: inline-block;
-      padding: 0.9rem 2.2rem;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: clamp(1.2rem, 5vw, 1.5rem);
-      color: #1f3d2e;
-      box-shadow: 0 8px 0 #43674a;
-      border: 2px solid #fce2d4;
-      margin-top: 1.5rem;
-      text-align: center;
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .garden-bed {
-      background: #8b6f50;
-      height: 130px;
-      border-radius: 80px 80px 20px 20px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: clamp(10px, 3vw, 25px);
-      padding-bottom: 5px;
-      margin: 1.5rem 0 2rem;
-      box-shadow: inset 0 -10px 0 #5e4a34, 0 12px 0 #477a5b;
-      width: 100%;
-    }
-
-    .plant {
-      font-size: clamp(2.5rem, 8vw, 3.8rem);
-      filter: drop-shadow(0 5px 4px #25432e);
-    }
-
-    .menu-card {
-      background: #fffaf2;
-      border-radius: 50px 15px 50px 15px;
-      padding: 1.8rem 1.2rem;
-      box-shadow: 0 15px 0 #b59d84, 0 10px 20px rgba(0, 0, 0, 0.1);
-      border: 3px solid var(--pantone-7508);
-      max-width: 700px;
-      margin: 2rem auto;
-      width: 100%;
-    }
-
-    .menu-card h3 {
-      color: var(--primary-green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .menu-sub {
-      text-align: center;
-      font-size: clamp(1.1rem, 4vw, 1.3rem);
-      color: #9b6f5b;
-      margin-bottom: 1.8rem;
-      font-style: italic;
-      background: #f3e3d5;
-      padding: 0.3rem 1.2rem;
-      border-radius: 40px;
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-      border: 1px dashed #b3826a;
-    }
-
-    .menu-items {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
-    }
-
-    .menu-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: clamp(1rem, 3.5vw, 1.2rem);
-      font-weight: 500;
-      color: #4e3f30;
-      background: #f3eae0;
-      padding: 0.7rem 1rem;
-      border-radius: 40px 8px 40px 8px;
-      border: 1px solid #dbbc9b;
-    }
-
-    .menu-item i {
-      font-size: 1.6rem;
-      color: var(--pantone-493);
-      width: 28px;
-      text-align: center;
-    }
-
-    .atividade-card {
-      background: #e6dccb;
-      border-radius: 60px 15px 60px 15px;
-      padding: 2rem 1.5rem;
-      border: 5px solid var(--pantone-5845);
-      box-shadow: 0 15px 0 #657c5a, 0 10px 20px rgba(0, 0, 0, 0.1);
-      margin: 2.5rem auto;
-      max-width: 800px;
-    }
-
-    .atividade-titulo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      font-size: clamp(1.8rem, 5vw, 2.5rem);
-      color: #3b6743;
-      margin-bottom: 0.8rem;
-    }
-
-    .subtitulo-oficina {
-      text-align: center;
-      font-size: clamp(1.3rem, 4.5vw, 1.8rem);
-      font-weight: 600;
-      color: #8b5a4b;
-      margin-bottom: 1.5rem;
-      background: #faf0dd;
-      padding: 0.5rem 1.5rem;
-      border-radius: 50px;
-      display: inline-block;
-      margin-left: auto;
-      margin-right: auto;
-      width: fit-content;
-      border: 2px dotted var(--pantone-493);
-    }
-
-    .plantar-opcoes {
-      background: #fff9ed;
-      border-radius: 50px 10px 50px 10px;
-      padding: 1.8rem 1.2rem;
-      margin: 1.5rem 0;
-      border: 2px solid #a7b892;
-    }
-
-    .opcoes-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.2rem 2rem;
-      margin: 1.2rem 0;
-    }
-
-    .opcao-item {
-      background: #f1e3d5;
-      padding: 0.6rem 1.5rem;
-      border-radius: 40px 8px 40px 8px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #4d6742;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border: 2px solid #c8ab8e;
-    }
-
-    .tema-dia-box {
-      background: var(--pantone-7508);
-      padding: 1.2rem;
-      border-radius: 40px 10px 40px 10px;
-      text-align: center;
-      margin: 1.8rem 0 0.8rem;
-      border: 4px solid #fff3d1;
-    }
-
-    .versiculo-destaque {
-      background: #f2e5d9;
-      padding: 1rem;
-      border-radius: 30px 8px 30px 8px;
-      border-left: 8px solid var(--pantone-493);
-      font-style: italic;
-      margin-top: 1.2rem;
-    }
-
-    .grupo-fotos {
-      background: #ede0cf;
-      border-radius: 60px 10px 60px 10px;
-      padding: 2rem 1rem;
-      margin: 3rem auto;
-      border: 5px solid var(--dark-soil);
-      max-width: 1000px;
-      width: 95%;
-    }
-
-    .fotos-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 1.5rem;
-      background: #fbf2e6;
-      border-radius: 50px 8px 50px 8px;
-      padding: 1.5rem 0.8rem;
-      border: 3px dashed var(--pantone-5845);
-    }
-
-    .foto-item {
-      width: clamp(120px, 30vw, 150px);
-      height: clamp(120px, 30vw, 150px);
-      border-radius: 35px 8px 35px 8px;
-      background: #d4bc9e;
-      border: 4px solid #f7e3cf;
-      box-shadow: 0 6px 0 #7b8f6f;
-      overflow: hidden;
-    }
-
-    .foto-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .palette-wrapper {
-      margin: 2.5rem 0 1rem;
-      text-align: center;
-      padding: 0 1rem;
-    }
-
-    .palette-title {
-      font-size: clamp(1.3rem, 5vw, 1.5rem);
-      font-weight: 600;
-      color: #5a4d3e;
-      margin-bottom: 1.5rem;
-      border-bottom: 2px dotted var(--pantone-493);
-      display: inline-block;
-      padding-bottom: 0.4rem;
-    }
-
-    .color-swatch {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px 20px;
-    }
-
-    .swatch-circle {
-      width: clamp(60px, 20vw, 75px);
-      height: clamp(60px, 20vw, 75px);
-      border-radius: 50% 20% 50% 20%;
-      box-shadow: 0 6px 0 #3e5b41;
-      border: 3px solid #f9e7d4;
-      margin-bottom: 5px;
-    }
-
-    .swatch-name {
-      font-weight: 600;
-      font-size: 0.8rem;
-      color: #463a2e;
-    }
-
-    .map-wrapper {
-      background: #ccb99e;
-      border-radius: 60px 8px 60px 8px;
-      padding: 1.5rem 1rem;
-      border: 5px solid #5f7b60;
-      margin: 2rem 0;
-      width: 100%;
-    }
-
-    #map {
-      height: 280px;
-      width: 100%;
-      border-radius: 40px 8px 40px 8px;
-      border: 4px solid white;
-      box-shadow: 0 10px 0 #38634c;
-    }
-
-    .endereco-box {
-      background: #fbf0e3;
-      padding: 1.2rem 0.8rem;
-      border-radius: 35px 8px 35px 8px;
-      margin-top: 1.5rem;
-      text-align: center;
-      border: 3px dashed var(--pantone-493);
-      font-size: clamp(1rem, 4vw, 1.2rem);
-    }
-
-    .btn-rota {
-      background: var(--pantone-7735);
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border-radius: 45px 8px 45px 8px;
-      font-weight: 700;
-      font-size: clamp(1.1rem, 4.5vw, 1.3rem);
-      text-decoration: none;
-      border: 2px solid var(--soft-pink);
-      box-shadow: 0 6px 0 #1d4d3a;
-      display: inline-block;
-      margin: 0.8rem 0 0.2rem;
-    }
-
-    /* chatbot */
-    .chatbot-container {
-      position: fixed;
-      bottom: 80px;
-      right: 10px;
-      z-index: 999;
-    }
-
-    .chatbot-button {
-      background: var(--pantone-493);
-      border: none;
-      width: 65px;
-      height: 65px;
-      border-radius: 50% 20% 50% 20%;
-      font-size: 2.5rem;
-      color: #fffae7;
-      box-shadow: 0 8px 0 #873f54;
-      cursor: pointer;
-    }
-
-    .chatbot-modal {
-      display: none;
-      position: absolute;
-      bottom: 75px;
-      right: 0;
-      width: 85vw;
-      max-width: 340px;
-      background: #fff9ef;
-      border: 4px solid var(--pantone-5845);
-      border-radius: 35px 8px 35px 8px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    }
-
-    .chatbot-modal.active {
-      display: block;
-    }
-
-    .chatbot-header {
-      background: var(--pantone-7735);
-      padding: 0.8rem 1rem;
-      border-radius: 30px 5px 0 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: white;
-    }
-
-    .chatbot-messages {
-      padding: 1rem;
-      max-height: 260px;
-      overflow-y: auto;
-      font-size: 0.95rem;
-    }
-
-    .bot-message {
-      background: #eddac8;
-      padding: 0.7rem;
-      border-radius: 15px 15px 15px 0;
-      margin-bottom: 10px;
-      border: 1px solid #b3826a;
-    }
-
-    .user-message {
-      background: #c5d9c0;
-      padding: 0.7rem;
-      border-radius: 15px 15px 0 15px;
-      margin-bottom: 10px;
-      text-align: right;
-      border: 1px solid #63855c;
-    }
-
-    .chatbot-input {
-      display: flex;
-      border-top: 2px solid var(--pantone-7508);
-    }
-
-    .chatbot-input input {
-      flex: 1;
-      padding: 0.7rem;
-      border: none;
-      border-radius: 0 0 0 15px;
-    }
-
-    .chatbot-input button {
-      background: var(--pantone-5845);
-      border: none;
-      padding: 0 1rem;
-      color: white;
-      border-radius: 0 0 15px 0;
-    }
-
-    .back-to-top {
-      position: fixed;
-      bottom: 80px;
-      left: 10px;
-      background: var(--dark-soil);
-      color: white;
-      width: 45px;
-      height: 45px;
-      border-radius: 25px 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.3s;
-    }
-
-    .back-to-top.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    footer {
-      background: #4d684f;
-      color: #fdf0da;
-      padding: 2rem 1rem;
-      text-align: center;
-      border-top: 8px solid var(--pantone-493);
-      margin-top: 2rem;
-    }
+    /* ... (Mantenha todo o seu CSS original aqui) ... */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #faf3ea; font-family: 'Quicksand', sans-serif; color: #2b4b3a; width: 100%; overflow-x: hidden; }
+    :root { --primary-green: #5b8c6f; --soft-pink: #f3cfc3; --dark-soil: #6b4f3a; --medium-soil: #b59d84; --light-sand: #e8ddcf; --pantone-493: #b8576e; --pantone-7735: #256f5e; --pantone-7508: #c5a582; --pantone-5845: #6b6f4a; }
+    h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+    h2 { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+    h3 { font-size: clamp(1.5rem, 5vw, 2rem); }
+    p { font-size: clamp(1rem, 4vw, 1.2rem); }
+    .section { padding: 2rem 1.2rem; max-width: 1100px; margin: 0 auto; width: 100%; }
+    .section__title { text-align: center; color: var(--primary-green); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+    .section__title i { color: var(--pantone-493); font-size: 1.8rem; }
+    .hero { background: linear-gradient(145deg, #2a5e45 0%, #4b7b63 50%, #699e7a 100%); padding: 2.5rem 1rem 3.5rem; border-bottom: 6px solid var(--pantone-493); width: 100%; position: relative; overflow: hidden; }
+    .floating-flowers { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    .floating-flower { position: absolute; font-size: 2.5rem; opacity: 0.25; animation: floatFlower 12s ease-in-out infinite; }
+    .floating-flower:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+    .floating-flower:nth-child(2) { top: 70%; right: 8%; animation-delay: 2s; }
+    .floating-flower:nth-child(3) { bottom: 15%; left: 15%; animation-delay: 4s; }
+    .floating-flower:nth-child(4) { top: 40%; right: 20%; animation-delay: 1s; }
+    .floating-flower:nth-child(5) { bottom: 30%; right: 30%; animation-delay: 5s; }
+    .floating-flower:nth-child(6) { top: 80%; left: 25%; animation-delay: 3s; }
+    .floating-flower:nth-child(7) { top: 20%; right: 40%; animation-delay: 6s; }
+    .floating-flower:nth-child(8) { bottom: 40%; left: 40%; animation-delay: 2.5s; }
+    @keyframes floatFlower { 0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); } 25% { transform: translateY(-10px) translateX(5px) rotate(5deg); } 50% { transform: translateY(-15px) translateX(-5px) rotate(-5deg); } 75% { transform: translateY(-5px) translateX(8px) rotate(3deg); } }
+    .hero-card { background: rgba(255, 251, 240, 0.92); backdrop-filter: blur(3px); max-width: 850px; margin: 0 auto; padding: 2.5rem 2rem; border-radius: 70px 20px 70px 20px; border: 4px solid var(--soft-pink); box-shadow: 0 25px 30px -10px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 245, 220, 0.5) inset; position: relative; z-index: 10; }
+    .hero h1 { color: #2b6b4a; font-weight: 700; line-height: 1.2; text-align: center; text-shadow: 2px 2px 0 rgba(255, 245, 220, 0.8); }
+    .hero h1 span { color: #b65b4a; font-size: 0.8em; display: block; }
+    .verse-box { font-weight: 500; color: #3d5e4b; border-top: 3px double var(--pantone-493); border-bottom: 3px double var(--pantone-493); padding: 1.3rem 1rem; margin: 2rem 0 1.5rem; background: rgba(250, 240, 230, 0.7); border-radius: 40px 10px 40px 10px; font-size: clamp(1rem, 3.5vw, 1.3rem); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); }
+    .data-horario { background: var(--pantone-7508); display: inline-block; padding: 0.9rem 2.2rem; border-radius: 60px; font-weight: 700; font-size: clamp(1.2rem, 5vw, 1.5rem); color: #1f3d2e; box-shadow: 0 8px 0 #43674a; border: 2px solid #fce2d4; margin-top: 1.5rem; text-align: center; width: fit-content; margin-left: auto; margin-right: auto; }
+    .garden-bed { background: #8b6f50; height: 130px; border-radius: 80px 80px 20px 20px; display: flex; align-items: flex-end; justify-content: center; gap: clamp(10px, 3vw, 25px); padding-bottom: 5px; margin: 1.5rem 0 2rem; box-shadow: inset 0 -10px 0 #5e4a34, 0 12px 0 #477a5b; width: 100%; }
+    .plant { font-size: clamp(2.5rem, 8vw, 3.8rem); filter: drop-shadow(0 5px 4px #25432e); }
+    .menu-card { background: #fffaf2; border-radius: 50px 15px 50px 15px; padding: 1.8rem 1.2rem; box-shadow: 0 15px 0 #b59d84, 0 10px 20px rgba(0, 0, 0, 0.1); border: 3px solid var(--pantone-7508); max-width: 700px; margin: 2rem auto; width: 100%; }
+    .menu-card h3 { color: var(--primary-green); display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 0.5rem; flex-wrap: wrap; }
+    .menu-sub { text-align: center; font-size: clamp(1.1rem, 4vw, 1.3rem); color: #9b6f5b; margin-bottom: 1.8rem; font-style: italic; background: #f3e3d5; padding: 0.3rem 1.2rem; border-radius: 40px; width: fit-content; margin-left: auto; margin-right: auto; border: 1px dashed #b3826a; }
+    .menu-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+    .menu-item { display: flex; align-items: center; gap: 10px; font-size: clamp(1rem, 3.5vw, 1.2rem); font-weight: 500; color: #4e3f30; background: #f3eae0; padding: 0.7rem 1rem; border-radius: 40px 8px 40px 8px; border: 1px solid #dbbc9b; }
+    .menu-item i { font-size: 1.6rem; color: var(--pantone-493); width: 28px; text-align: center; }
+    .atividade-card { background: #e6dccb; border-radius: 60px 15px 60px 15px; padding: 2rem 1.5rem; border: 5px solid var(--pantone-5845); box-shadow: 0 15px 0 #657c5a, 0 10px 20px rgba(0, 0, 0, 0.1); margin: 2.5rem auto; max-width: 800px; }
+    .atividade-titulo { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: clamp(1.8rem, 5vw, 2.5rem); color: #3b6743; margin-bottom: 0.8rem; }
+    .subtitulo-oficina { text-align: center; font-size: clamp(1.3rem, 4.5vw, 1.8rem); font-weight: 600; color: #8b5a4b; margin-bottom: 1.5rem; background: #faf0dd; padding: 0.5rem 1.5rem; border-radius: 50px; display: inline-block; margin-left: auto; margin-right: auto; width: fit-content; border: 2px dotted var(--pantone-493); }
+    .plantar-opcoes { background: #fff9ed; border-radius: 50px 10px 50px 10px; padding: 1.8rem 1.2rem; margin: 1.5rem 0; border: 2px solid #a7b892; }
+    .opcoes-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.2rem 2rem; margin: 1.2rem 0; }
+    .opcao-item { background: #f1e3d5; padding: 0.6rem 1.5rem; border-radius: 40px 8px 40px 8px; font-size: 1.2rem; font-weight: 600; color: #4d6742; display: flex; align-items: center; gap: 10px; border: 2px solid #c8ab8e; }
+    .tema-dia-box { background: var(--pantone-7508); padding: 1.2rem; border-radius: 40px 10px 40px 10px; text-align: center; margin: 1.8rem 0 0.8rem; border: 4px solid #fff3d1; }
+    .versiculo-destaque { background: #f2e5d9; padding: 1rem; border-radius: 30px 8px 30px 8px; border-left: 8px solid var(--pantone-493); font-style: italic; margin-top: 1.2rem; }
+    .grupo-fotos { background: #ede0cf; border-radius: 60px 10px 60px 10px; padding: 2rem 1rem; margin: 3rem auto; border: 5px solid var(--dark-soil); max-width: 1000px; width: 95%; }
+    .fotos-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem; background: #fbf2e6; border-radius: 50px 8px 50px 8px; padding: 1.5rem 0.8rem; border: 3px dashed var(--pantone-5845); }
+    .foto-item { width: clamp(120px, 30vw, 150px); height: clamp(120px, 30vw, 150px); border-radius: 35px 8px 35px 8px; background: #d4bc9e; border: 4px solid #f7e3cf; box-shadow: 0 6px 0 #7b8f6f; overflow: hidden; }
+    .foto-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .palette-wrapper { margin: 2.5rem 0 1rem; text-align: center; padding: 0 1rem; }
+    .palette-title { font-size: clamp(1.3rem, 5vw, 1.5rem); font-weight: 600; color: #5a4d3e; margin-bottom: 1.5rem; border-bottom: 2px dotted var(--pantone-493); display: inline-block; padding-bottom: 0.4rem; }
+    .color-swatch { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px 20px; }
+    .swatch-circle { width: clamp(60px, 20vw, 75px); height: clamp(60px, 20vw, 75px); border-radius: 50% 20% 50% 20%; box-shadow: 0 6px 0 #3e5b41; border: 3px solid #f9e7d4; margin-bottom: 5px; }
+    .swatch-name { font-weight: 600; font-size: 0.8rem; color: #463a2e; }
+    .map-wrapper { background: #ccb99e; border-radius: 60px 8px 60px 8px; padding: 1.5rem 1rem; border: 5px solid #5f7b60; margin: 2rem 0; width: 100%; }
+    #map { height: 280px; width: 100%; border-radius: 40px 8px 40px 8px; border: 4px solid white; box-shadow: 0 10px 0 #38634c; }
+    .endereco-box { background: #fbf0e3; padding: 1.2rem 0.8rem; border-radius: 35px 8px 35px 8px; margin-top: 1.5rem; text-align: center; border: 3px dashed var(--pantone-493); font-size: clamp(1rem, 4vw, 1.2rem); }
+    .btn-rota { background: var(--pantone-7735); color: white; padding: 0.8rem 1.5rem; border-radius: 45px 8px 45px 8px; font-weight: 700; font-size: clamp(1.1rem, 4.5vw, 1.3rem); text-decoration: none; border: 2px solid var(--soft-pink); box-shadow: 0 6px 0 #1d4d3a; display: inline-block; margin: 0.8rem 0 0.2rem; }
+    .chatbot-container { position: fixed; bottom: 80px; right: 10px; z-index: 999; }
+    .chatbot-button { background: var(--pantone-493); border: none; width: 65px; height: 65px; border-radius: 50% 20% 50% 20%; font-size: 2.5rem; color: #fffae7; box-shadow: 0 8px 0 #873f54; cursor: pointer; }
+    .chatbot-modal { display: none; position: absolute; bottom: 75px; right: 0; width: 85vw; max-width: 340px; background: #fff9ef; border: 4px solid var(--pantone-5845); border-radius: 35px 8px 35px 8px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); }
+    .chatbot-modal.active { display: block; }
+    .chatbot-header { background: var(--pantone-7735); padding: 0.8rem 1rem; border-radius: 30px 5px 0 0; display: flex; justify-content: space-between; align-items: center; color: white; }
+    .chatbot-messages { padding: 1rem; max-height: 260px; overflow-y: auto; font-size: 0.95rem; }
+    .bot-message { background: #eddac8; padding: 0.7rem; border-radius: 15px 15px 15px 0; margin-bottom: 10px; border: 1px solid #b3826a; }
+    .user-message { background: #c5d9c0; padding: 0.7rem; border-radius: 15px 15px 0 15px; margin-bottom: 10px; text-align: right; border: 1px solid #63855c; }
+    .chatbot-input { display: flex; border-top: 2px solid var(--pantone-7508); }
+    .chatbot-input input { flex: 1; padding: 0.7rem; border: none; border-radius: 0 0 0 15px; }
+    .chatbot-input button { background: var(--pantone-5845); border: none; padding: 0 1rem; color: white; border-radius: 0 0 15px 0; }
+    .back-to-top { position: fixed; bottom: 80px; left: 10px; background: var(--dark-soil); color: white; width: 45px; height: 45px; border-radius: 25px 5px; display: flex; align-items: center; justify-content: center; text-decoration: none; opacity: 0; pointer-events: none; transition: 0.3s; }
+    .back-to-top.show { opacity: 1; pointer-events: auto; }
+    footer { background: #4d684f; color: #fdf0da; padding: 2rem 1rem; text-align: center; border-top: 8px solid var(--pantone-493); margin-top: 2rem; }
   </style>
 </head>
 
@@ -654,7 +104,7 @@
       <div style="font-size:clamp(1.6rem, 6vw, 2rem); font-weight:600; color:#366946; text-align: center;">FLORESÇA ·
         SOLO FÉRTIL</div>
       <div class="data-horario">
-        <i class="fas fa-calendar-alt"></i> 14 março · 15h00
+        <i class="fas fa-calendar-alt"></i> 14 março · 14h47
       </div>
     </div>
   </section>
@@ -671,11 +121,12 @@
       <div id="map"></div>
       <div class="endereco-box">
         <i class="fas fa-location-dot" style="color:#b8576e;"></i>
-        <strong>Igreja da Cidade - Campus Colina</strong><br>
-        R. Todas as Nações, s/n - Vila Tatetuba, São José dos Campos - SP
+        <strong>CTA - Jardim da Granja</strong><br>
+        Av. Brigadeiro Faria Lima, 1941, São José dos Campos - SP<br>
+        CEP 12227-000
       </div>
       <div style="text-align:center;">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=-23.193686,-45.858650" target="_blank"
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Av.+Brigadeiro+Faria+Lima,+1941+-+Jardim+da+Granja,+S%C3%A3o+Jos%C3%A9+dos+Campos+-+SP,+12227-000" target="_blank"
           class="btn-rota">
           <i class="fas fa-directions"></i> traçar rota
         </a>
@@ -720,23 +171,19 @@
     </div>
   </section>
 
-  <!-- FOTOS DO GRUPO -->
   <section class="grupo-fotos">
     <h2 class="section__title"><i class="fas fa-camera-retro"></i> grupo GDC</h2>
     <p style="text-align:center; margin-bottom:0.5rem;">nossos registros especiais</p>
     <div class="fotos-grid" id="fotosGrid">
-      <div class="foto-item"><img src="m.jpg" alt="Foto 1"
-          onerror="this.src='https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=150&h=150&fit=crop'"></div>
-      <div class="foto-item"><img src="oi.jpg" alt="Foto 2"
-          onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=150&h=150&fit=crop'"></div>
-      <div class="foto-item"><img src="b.jpg" alt="Foto 3"
-          onerror="this.src='https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=150&h=150&fit=crop'"></div>
-      <div class="foto-item"><img src="amg.jpg" alt="Foto 4"
-          onerror="this.src='https://images.unsplash.com/photo-1536640712-4d4c36ff0e4e?w=150&h=150&fit=crop'"></div>
-      <div class="foto-item"><img src="i.jpg" alt="Foto 5"
-          onerror="this.src='https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=150&h=150&fit=crop'"></div>
-      <div class="foto-item"><img src="h.jpg" alt="Foto 6"
-          onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="m.jpg" alt="Foto 1" onerror="this.src='https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="oi.jpg" alt="Foto 2" onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="b.jpg" alt="Foto 3" onerror="this.src='https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="amg.jpg" alt="Foto 4" onerror="this.src='https://images.unsplash.com/photo-1536640712-4d4c36ff0e4e?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="i.jpg" alt="Foto 5" onerror="this.src='https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="h.jpg" alt="Foto 6" onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="p.jpg" alt="Foto 7" onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="po.jpg" alt="Foto 8" onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=150&h=150&fit=crop'"></div>
+      <div class="foto-item"><img src="a.jpeg" alt="Foto 6" onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=150&h=150&fit=crop'"></div>
     </div>
     <p style="text-align:center; margin-top:1rem; font-style:italic;">Fotinhoos🌸</p>
   </section>
@@ -744,18 +191,10 @@
   <div class="palette-wrapper">
     <div class="palette-title">🌸 cores do jardim (dress code) 🌸</div>
     <div class="color-swatch">
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#b8576e;"></div><span class="swatch-name"></span>
-      </div>
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#256f5e;"></div><span class="swatch-name"></span>
-      </div>
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#c5a582;"></div><span class="swatch-name"></span>
-      </div>
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#6b6f4a;"></div><span class="swatch-name"></span>
-      </div>
+      <div class="swatch"><div class="swatch-circle" style="background:#b8576e;"></div></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#256f5e;"></div></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#c5a582;"></div></div>
+      <div class="swatch"><div class="swatch-circle" style="background:#6b6f4a;"></div></div>
     </div>
   </div>
 
@@ -764,12 +203,10 @@
     <div class="chatbot-modal" id="chatbotModal">
       <div class="chatbot-header">
         <h3><i class="fas fa-robot"></i> flora</h3>
-        <button id="chatbotClose"
-          style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
+        <button id="chatbotClose" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
       </div>
       <div class="chatbot-messages" id="chatbotMessages">
-        <div class="bot-message">Oi! Sou a Flora! 🌸 Posso te ajudar com o endereço, horário, o que comer ou o look do
-          dia!</div>
+        <div class="bot-message">Oi! Sou a Flora! 🌸 Posso te ajudar com o endereço, horário, o que comer ou o look do dia!</div>
       </div>
       <div class="chatbot-input">
         <input type="text" id="chatbotInput" placeholder="Sua dúvida..." />
@@ -783,16 +220,16 @@
   <footer>
     <div style="font-size: 2.5rem; letter-spacing: 8px;">🌱🌿🌸🌻</div>
     <p>bloom gardening · festa da amiga · solo fértil</p>
-    <p>Igreja da Cidade - Campus Colina</p>
+    <p>CTA - São José dos Campos</p>
   </footer>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     (function () {
-      // MAPA
-      const lat = -23.193686;
-      const lng = -45.858650;
-      const map = L.map('map').setView([lat, lng], 16);
+      // MAPA ATUALIZADO PARA O CTA
+      const lat = -23.2115; // Coordenada aproximada do CTA/Memorial Aeroespacial
+      const lng = -45.8715;
+      const map = L.map('map').setView([lat, lng], 15);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
       const iconFlor = L.icon({
@@ -801,7 +238,7 @@
       });
 
       L.marker([lat, lng], { icon: iconFlor }).addTo(map)
-        .bindPopup("<b>🌸 Campus Colina</b><br>Bloom Gardening")
+        .bindPopup("<b>🌸 CTA - Local do Bloom</b><br>Av. Brig. Faria Lima, 1941")
         .openPopup();
 
       // CHATBOT
@@ -825,19 +262,12 @@
 
       function getBotReply(msg) {
         const t = msg.toLowerCase();
-        // Dicas exclusivas no Chatbot
-        if (t.includes("levar") || t.includes("trazer") || t.includes("levar?") || t.includes("dica")) {
-          return "✨ <b>Anote as dicas:</b> Como teremos atividades práticas, recomendo trazer <b>Muita criatividade, </b> <b>sementes,</b> Tintas e Pincéis . Se você tiver uma <b>prazinha de jardinagem</b> favorita, pode trazer também! 🌸";
-        }
-        if (t.includes("roupa") || t.includes("vestir") || t.includes("look")) {
-          return "👗 O Dress Code é <b>Jardim de Primavera</b>! Sinta-se à vontade para usar tons de Rosa, Verde ou Bege. Vá com algo confortável para aproveitar o dia!";
-        }
-        if (t.includes("comer") || t.includes("comida") || t.includes("cardápio")) {
-          return "🍓 Teremos um picnic delicioso com  morangos, sanduíches naturais e limonada";
-        }
-        if (t.includes("onde") || t.includes("local") || t.includes("rota")) return "📍 É na Igreja da Cidade - Campus Colina! Clique no botão 'Traçar Rota' no mapa para abrir o GPS!";
-
-        return "🌼 Você pode me perguntar 'O que devo levar?', sobre o 'Dress Code', onde será ou sobre a 'Comida'!";
+        if (t.includes("levar") || t.includes("trazer")) return "✨ <b>Anote:</b> Traga criatividade, sementes e pincéis! 🌸";
+        if (t.includes("roupa") || t.includes("look")) return "👗 Dress Code: <b>Jardim de Primavera</b> (Rosa, Verde ou Bege)!";
+        if (t.includes("comer")) return "🍓 Teremos um picnic com morangos e sanduíches naturais!";
+        if (t.includes("onde") || t.includes("local")) return "📍 Será no CTA (Jardim da Granja)! Use o botão 'Traçar Rota' para abrir o GPS.";
+        if (t.includes("horário") || t.includes("hora")) return "⏰ O encontro começa às <b>14h47</b> em ponto!";
+        return "🌼 Pergunte sobre o que levar, o look, local ou a comida!";
       }
 
       function handleSend() {
@@ -851,7 +281,6 @@
       sendBtn.onclick = handleSend;
       inputField.onkeypress = (e) => { if (e.key === 'Enter') handleSend(); };
 
-      // BACK TO TOP
       const topBtn = document.getElementById('backToTop');
       window.onscroll = () => {
         if (window.scrollY > 300) topBtn.classList.add('show');
@@ -860,5 +289,4 @@
     })();
   </script>
 </body>
-
 </html>

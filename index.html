@@ -121,19 +121,17 @@
       <div id="map"></div>
       <div class="endereco-box">
         <i class="fas fa-location-dot" style="color:#b8576e;"></i>
-        <strong>CTA - Jardim da Granja</strong><br>
-        Av. Brigadeiro Faria Lima, 1941, São José dos Campos - SP<br>
-        CEP 12227-000
+        <strong>DCTA / Vila das Acácias</strong><br>
+        Praça Marechal-do-Ar Eduardo Gomes, 50<br>
+        São José dos Campos - SP | 12245-021
       </div>
       <div style="text-align:center;">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Av.+Brigadeiro+Faria+Lima,+1941+-+Jardim+da+Granja,+S%C3%A3o+Jos%C3%A9+dos+Campos+-+SP,+12227-000" target="_blank"
-          class="btn-rota">
+        <a href="https://maps.google.com/?cid=16589578156716962902&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="btn-rota">
           <i class="fas fa-directions"></i> traçar rota
         </a>
       </div>
     </div>
   </section>
-
   <section class="section">
     <div class="menu-card">
       <h3><i class="fas fa-strawberry"></i> mesa ao ar livre <i class="fas fa-leaf"></i></h3>
@@ -217,18 +215,20 @@
 
   <a href="#" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
 
-  <footer>
+ 
+
+ <footer>
     <div style="font-size: 2.5rem; letter-spacing: 8px;">🌱🌿🌸🌻</div>
     <p>bloom gardening · festa da amiga · solo fértil</p>
-    <p>CTA - São José dos Campos</p>
+    <p>Praça Marechal-do-Ar Eduardo Gomes, 50</p>
   </footer>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     (function () {
-      // MAPA ATUALIZADO PARA O CTA
-      const lat = -23.2115; // Coordenada aproximada do CTA/Memorial Aeroespacial
-      const lng = -45.8715;
+      // Coordenadas para Praça Marechal Eduardo Gomes, 50 (DCTA)
+      const lat = -23.2053;
+      const lng = -45.8702;
       const map = L.map('map').setView([lat, lng], 15);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
@@ -238,10 +238,10 @@
       });
 
       L.marker([lat, lng], { icon: iconFlor }).addTo(map)
-        .bindPopup("<b>🌸 CTA - Local do Bloom</b><br>Av. Brig. Faria Lima, 1941")
+        .bindPopup("<b>🌸 DCTA - Campus CTA</b><br>Praça Marechal Eduardo Gomes, 50")
         .openPopup();
 
-      // CHATBOT
+      // Chatbot
       const chatBtn = document.getElementById('chatbotButton');
       const modal = document.getElementById('chatbotModal');
       const closeBtn = document.getElementById('chatbotClose');
@@ -262,31 +262,20 @@
 
       function getBotReply(msg) {
         const t = msg.toLowerCase();
-        if (t.includes("levar") || t.includes("trazer")) return "✨ <b>Anote:</b> Traga criatividade, sementes e pincéis! 🌸";
-        if (t.includes("roupa") || t.includes("look")) return "👗 Dress Code: <b>Jardim de Primavera</b> (Rosa, Verde ou Bege)!";
-        if (t.includes("comer")) return "🍓 Teremos um picnic com morangos e sanduíches naturais!";
-        if (t.includes("onde") || t.includes("local")) return "📍 Será no CTA (Jardim da Granja)! Use o botão 'Traçar Rota' para abrir o GPS.";
-        if (t.includes("horário") || t.includes("hora")) return "⏰ O encontro começa às <b>14h47</b> em ponto!";
-        return "🌼 Pergunte sobre o que levar, o look, local ou a comida!";
+        if (t.includes("local") || t.includes("onde")) return "📍 Será na Praça Marechal-do-Ar Eduardo Gomes, 50 (DCTA)!";
+        if (t.includes("horário")) return "⏰ Começamos às 14h47!";
+        return "🌼 Posso ajudar com o local, horário ou o que levar!";
       }
 
-      function handleSend() {
+      sendBtn.onclick = () => {
         const val = inputField.value.trim();
-        if (!val) return;
-        addMessage(val, 'user');
-        inputField.value = '';
-        setTimeout(() => addMessage(getBotReply(val), 'bot'), 500);
-      }
-
-      sendBtn.onclick = handleSend;
-      inputField.onkeypress = (e) => { if (e.key === 'Enter') handleSend(); };
-
-      const topBtn = document.getElementById('backToTop');
-      window.onscroll = () => {
-        if (window.scrollY > 300) topBtn.classList.add('show');
-        else topBtn.classList.remove('show');
+        if (val) {
+          addMessage(val, 'user');
+          inputField.value = '';
+          setTimeout(() => addMessage(getBotReply(val), 'bot'), 500);
+        }
       };
     })();
   </script>
-</body>
+  </body>
 </html>
